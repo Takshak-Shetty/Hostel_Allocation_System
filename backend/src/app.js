@@ -19,6 +19,7 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://hostelallocationsystem-production-3e54.up.railway.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
