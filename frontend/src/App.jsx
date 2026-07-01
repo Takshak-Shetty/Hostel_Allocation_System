@@ -13,6 +13,9 @@ import AdminComplaintsPage from "./pages/admin/AdminComplaintsPage";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentComplaintsPage from "./pages/student/StudentComplaintsPage";
 
+import AccountPage from "./pages/AccountPage";
+import SettingsPage from "./pages/SettingsPage";
+
 export default function App() {
   const { user, loading } = useAuth();
 
@@ -96,6 +99,29 @@ export default function App() {
         element={
           user?.role === "STUDENT" ? (
             <StudentComplaintsPage />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+
+      {/* SHARED ROUTES - Available to both admin and student */}
+      <Route
+        path="/account"
+        element={
+          user ? (
+            <AccountPage />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+
+      <Route
+        path="/settings"
+        element={
+          user ? (
+            <SettingsPage />
           ) : (
             <Navigate to="/login" replace />
           )

@@ -1,13 +1,12 @@
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { NotificationBadge } from "../common/StatusBadge";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { NotificationIcon, UserIcon, LogoutIcon, CloseIcon } from "../common/Icons";
+import { NotificationIcon, CloseIcon } from "../common/Icons";
+import ProfileDropdown from "../common/ProfileDropdown";
 
 export default function Topbar() {
-  const { logout, user } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   const [showNotifications, setShowNotifications] = useState(false);
   const notificationRef = useRef(null);
 
@@ -26,11 +25,6 @@ export default function Topbar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showNotifications]);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
 
   const currentTime = new Date().toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -115,20 +109,8 @@ export default function Topbar() {
           )}
         </div>
 
-        {/* User Menu */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
-            <UserIcon className="w-4 h-4 text-white" />
-          </div>
-          
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm bg-slate-800/50 text-slate-200 hover:bg-red-600/20 hover:text-red-300 border border-slate-700/50 hover:border-red-500/30 transition-all duration-200"
-          >
-            <LogoutIcon className="w-4 h-4" />
-            Logout
-          </button>
-        </div>
+        {/* User Profile Dropdown */}
+        <ProfileDropdown />
       </div>
     </header>
   );

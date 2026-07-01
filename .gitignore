@@ -10,6 +10,18 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Environment files
+# Environment files — NEVER commit these
 .env
 .env.local
+.env.production
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Prisma generated
+generated/
+.prisma/

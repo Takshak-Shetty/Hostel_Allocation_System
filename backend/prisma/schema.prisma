@@ -7,115 +7,90 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//
-// STUDENT
-//
 model Student {
   id              Int          @id @default(autoincrement())
   name            String
-  email           String       @unique
-  password        String
   branch          String
   year            Int
   gender          String
-  preferredHostel String?
+  disciplineScore Int?
+  preferences     String?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
-
+  email           String       @unique
+  password        String
   allocations     Allocation[]
   complaints      Complaint[]
 }
 
-//
-// HOSTEL
-//
 model Hostel {
-  id             Int          @id @default(autoincrement())
-  name           String
-  genderAllowed  String
-  capacity       Int
-  createdAt      DateTime     @default(now())
-
-  rooms          Room[]
-  complaints     Complaint[]
-  admins         Admin[]
+  id            Int         @id @default(autoincrement())
+  name          String
+  genderAllowed String
+  capacity      Int
+  distance      Int
+  createdAt     DateTime    @default(now())
+  complaints    Complaint[]
+  rooms         Room[]
 }
 
-//
-// ROOM
-//
 model Room {
   id               Int          @id @default(autoincrement())
   hostelId         Int
   roomNumber       String
   capacity         Int
-  occupiedCount    Int          @default(0)
+  currentOccupancy Int          @default(0)
   createdAt        DateTime     @default(now())
-
-  hostel           Hostel       @relation(fields: [hostelId], references: [id])
   allocations      Allocation[]
   complaints       Complaint[]
+  hostel           Hostel       @relation(fields: [hostelId], references: [id])
 
   @@unique([hostelId, roomNumber])
 }
 
-//
-// ALLOCATION
-//
 model Allocation {
-  id         Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   allocatedAt DateTime @default(now())
-  studentId  Int
-  roomId     Int
-  active     Boolean   @default(true)
-
-  student    Student   @relation(fields: [studentId], references: [id])
-  room       Room      @relation(fields: [roomId], references: [id])
+  studentId   Int
+  roomId      Int
+  active      Boolean  @default(true)
+  room        Room     @relation(fields: [roomId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id])
 
   @@index([roomId])
   @@index([studentId])
 }
 
-//
-// COMPLAINT
-//
 model Complaint {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   issueType   String
   description String?
   severity    Severity
-  status      Status    @default(PENDING)
-  category    String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
   studentId   Int
   hostelId    Int
   roomId      Int?
+  category    String?
+  updatedAt   DateTime @updatedAt
+  hostel      Hostel   @relation(fields: [hostelId], references: [id])
+  room        Room?    @relation(fields: [roomId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id])
 
-  student     Student   @relation(fields: [studentId], references: [id])
-  hostel      Hostel    @relation(fields: [hostelId], references: [id])
-  room        Room?     @relation(fields: [roomId], references: [id])
+  @@index([hostelId], map: "Complaint_hostelId_fkey")
+  @@index([roomId], map: "Complaint_roomId_fkey")
+  @@index([studentId], map: "Complaint_studentId_fkey")
 }
 
-//
-// ADMIN
-//
 model Admin {
   id        Int        @id @default(autoincrement())
   name      String
   email     String     @unique
   password  String
-  role      AdminRole  @default(HOSTEL_ADMIN)
-  hostelId  Int?
+  role      Admin_role @default(WARDEN)
   createdAt DateTime   @default(now())
-
-  hostel    Hostel?    @relation(fields: [hostelId], references: [id])
 }
 
-//
-// ENUMS
-//
 enum Severity {
   LOW
   MEDIUM
@@ -130,6 +105,9 @@ enum Status {
   CLOSED
 }
 
-enum AdminRole {
-  HOSTEL_ADMIN
+enum Admin_role {
+  SUPERADMIN
+  WARDEN
+  MAINTENANCE
+  AGENT
 }

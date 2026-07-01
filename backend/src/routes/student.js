@@ -42,4 +42,26 @@ router.get("/profile", authMiddleware, requireStudent, async (req, res) => {
   }
 });
 
+// ================================
+// UPDATE STUDENT PROFILE
+// ================================
+router.put("/profile", authMiddleware, requireStudent, async (req, res) => {
+  try {
+    const { name, email, bio } = req.body;
+    
+    const updatedStudent = await prisma.student.update({
+      where: { id: req.user.id },
+      data: {
+        ...(name && { name }),
+        ...(email && { email }),
+        ...(bio && { bio }),
+      },
+    });
+
+    res.json({ student: updatedStudent, message: "Profile updated successfully" });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
