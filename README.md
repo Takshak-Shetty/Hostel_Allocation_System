@@ -198,7 +198,7 @@ npm run dev           # runs on :5173
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&pause=1000&color=6366F1&center=true&vCenter=true&width=500&lines=Thanks+for+checking+this+out!;⭐+Star+the+repo+if+you+found+it+useful!" alt="footer" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&pause=1000&color=6366F1&center=true&vCenter=true&width=500&lines=Thanks+for+checking+this+out!;%E2%AD%90+Star+the+repo+if+you+found+it+useful!" alt="footer" />
 
 <br/>
 
