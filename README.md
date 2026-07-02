@@ -122,8 +122,8 @@ npm install
 
 Create `.env`:
 ```env
-DATABASE_URL="mysql://root:PASSWORD@localhost:3306/hostel_management"
-JWT_SECRET="your_jwt_secret"
+DATABASE_URL="mysql://<user>:<password>@<host>:<port>/<database>"
+JWT_SECRET="<your_jwt_secret>"
 PORT=4000
 ```
 
@@ -145,6 +145,8 @@ Create `.env`:
 VITE_API_URL=http://localhost:4000/api
 ```
 
+> ⚠️ Never commit `.env` files. Add them to `.gitignore`.
+
 ```bash
 npm run dev
 ```
@@ -154,21 +156,6 @@ npm run dev
 ```
 http://localhost:5173
 ```
-
----
-
-## 🔑 Sample Credentials
-
-<div align="center">
-
-| Role | Email | Password |
-|------|-------|----------|
-| 🎓 Student | `john@student.com` | `Student@123` |
-| 🎓 Student | `jane@student.com` | `Student@123` |
-| 🛡️ Admin | `beta@hostel.com` | `Admin@123` |
-| 🛡️ Admin | `alpha@hostel.com` | `Admin@123` |
-
-</div>
 
 ---
 
