@@ -19,7 +19,8 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://hostelallocationsystem-production-3e54.up.railway.app",
+  "http://localhost:4000",
+  "https://hostel-allocation-system-tau.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
