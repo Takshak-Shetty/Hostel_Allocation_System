@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=32&pause=1000&color=6366F1&center=true&vCenter=true&width=700&lines=🏨+Smart+Hostel+Allocation;Automated+Room+Assignment;SLA-Based+Complaint+System;Built+with+React+%2B+Node.js" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=32&pause=1000&color=6366F1&center=true&vCenter=true&width=700&lines=%F0%9F%8F%A8+Smart+Hostel+Allocation;Automated+Room+Assignment;SLA-Based+Complaint+System;Built+with+React+%2B+Node.js" alt="Smart Hostel Allocation System" />
 
 <br/>
 
